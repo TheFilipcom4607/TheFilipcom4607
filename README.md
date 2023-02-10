@@ -7,7 +7,8 @@
 
 - 📫 How to reach me **Admin@thefilip.com**
 
-- ⚡ Fun fact **I like cats and video games**
+- ⚡ Fun fact 
+**I like cats and video games**
 
 
 <p align="left">
