@@ -10,6 +10,7 @@
 - ⚡ Fun fact **I can solve a rubiks cube**
 
 <h3 align="left">Connect with me:</h3>
+**admin@thefilip.com**
 <p align="left">
 </p>
 
