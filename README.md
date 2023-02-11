@@ -1,7 +1,7 @@
 <img src="header.png" alt="header">
 <h3 align="center">A self-taught programmer</h3>
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=thefilipcom4607&label=Profile%20views&color=09ce16&style=flat" alt="thefilipcom4607" /> </p>
+<p align="center"> <img src="https://komarev.com/ghpvc/?username=thefilipcom4607&label=Profile%20views&color=09ce16&style=flat" alt="thefilipcom4607" /> </p>
 
 - 🌱 I’m currently learning **Python & Golang**
 
