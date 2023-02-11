@@ -7,9 +7,7 @@
 
 - 📫 How to reach me **admin@thefilip.com**
 
-- ⚡ Fun fact **I can solve a rubiks cube**
-
-<h3 align="left">Connect with me:</h3>
+- ⚡ Fun fact **I can solve a rubiks cube
 <p align="left">
 </p>
 
