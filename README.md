@@ -1,8 +1,7 @@
 <img src="header.png" alt="header">
 <h3 align="center">A self-taught programmer</h3>
 
-<p align="center"> <img src="https://komarev.com/ghpvc/?username=thefilipcom4607&label=Profile%20views&color=09ce16&style=flat" alt="thefilipcom4607" /> </p> 
-![](https://dcbadge.vercel.app/api/shield/966345148327944312)
+<p align="center"> <img src="https://komarev.com/ghpvc/?username=thefilipcom4607&label=Profile%20views&color=09ce16&style=flat" alt="thefilipcom4607" /> </.](https://dcbadge.vercel.app/api/shield/966345148327944312)
 - 🌱 I’m currently learning **Python & Golang**
 
 - 📫 How to reach me **admin@thefilip.com**
