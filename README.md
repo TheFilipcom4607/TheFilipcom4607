@@ -5,7 +5,7 @@
 
 - 🌱 I’m currently learning **Golang**
 
-- 📫 How to reach me **admin@thefilip.com**
+- 📫 How to reach me **fm@thefilip.com**
 
 - ⚡ Fun fact **I can solve a rubiks cube**
 <p align="left">
