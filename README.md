@@ -1,6 +1,5 @@
 <img src="header.png" alt="header">
 <h3 align="center">A self-taught programmer</h3>
-l
 <p align="center"> <img src="https://komarev.com/ghpvc/?username=thefilipcom4607&label=Profile%20views&color=09ce16&style=flat" alt="thefilipcom4607" /> </.]
 
 - 🌱 I’m currently learning **Golang**
