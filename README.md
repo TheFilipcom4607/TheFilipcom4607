@@ -1,6 +1,5 @@
 <img src="header.png" alt="header">
 <h3 align="center">A self-taught programmer</h3>
-![](https://dcbadge.vercel.app/api/shield/966345148327944312)
 
 - 🌱 I’m currently learning **Golang**
 
