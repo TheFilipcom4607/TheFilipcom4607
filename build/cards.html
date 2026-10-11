@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=block" rel="stylesheet">
+<style>
+  body.dark {
+    --bg: #0a0a0a;
+    --bg-sub: #111111;
+    --border: #262626;
+    --border-strong: #3a3a3a;
+    --text: #ededed;
+    --muted: #a1a1a1;
+    --faint: #737373;
+    --grid: rgba(255,255,255,.05);
+    --dots: rgba(255,255,255,.10);
+    --btn-bg: #ededed;
+    --btn-fg: #0a0a0a;
+  }
+  body.light {
+    --bg: #ffffff;
+    --bg-sub: #fafafa;
+    --border: #e3e3e3;
+    --border-strong: #d4d4d4;
+    --text: #171717;
+    --muted: #666666;
+    --faint: #8f8f8f;
+    --grid: rgba(0,0,0,.05);
+    --dots: rgba(0,0,0,.10);
+    --btn-bg: #171717;
+    --btn-fg: #ffffff;
+  }
+  :root { --green: #45a557; --amber: #e5a00d; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: transparent; }
+  body {
+    font-family: Geist, -apple-system, sans-serif;
+    color: var(--text);
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 24px; align-items: flex-start;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01";
+  }
+  .mono, code { font-family: "Geist Mono", ui-monospace, monospace; }
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .full { width: 880px; }
+  .half { width: 434px; }
+  svg.i { width: 16px; height: 16px; flex: none; }
+
+  /* hero */
+  .hero { position: relative; }
+  .hero .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, var(--grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+    background-size: 44px 44px;
+    background-position: -1px -1px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 90% at 100% 0%, #000 0%, transparent 75%);
+  }
+  .hero .inner { position: relative; padding: 52px 52px 44px; }
+  .hero .label { font-size: 13px; color: var(--faint); letter-spacing: 0; }
+  .hero h1 {
+    font-size: 56px; line-height: 1.04; font-weight: 600; letter-spacing: -0.045em;
+    margin-top: 22px;
+  }
+  .hero h1 span { color: var(--faint); display: block; }
+  .hero p { font-size: 17px; line-height: 1.6; color: var(--muted); margin-top: 22px; max-width: 600px; }
+  .stats { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); }
+  .stat { padding: 22px 26px 24px; }
+  .stat + .stat { border-left: 1px solid var(--border); }
+  .stat .n { font-size: 30px; font-weight: 600; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+  .stat .l { font-size: 13.5px; line-height: 1.45; color: var(--muted); margin-top: 6px; }
+
+  /* buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 40px; padding: 0 16px;
+    border-radius: 6px; border: 1px solid var(--border-strong);
+    background: var(--bg); color: var(--text);
+    font-size: 14px; font-weight: 500; white-space: nowrap;
+  }
+  .btn.primary { background: var(--btn-bg); color: var(--btn-fg); border-color: var(--btn-bg); }
+
+  /* headings */
+  .heading { width: 880px; padding: 4px 0 14px; border-bottom: 1px solid var(--border-strong);
+    display: flex; align-items: baseline; justify-content: space-between; }
+  .heading .t { font-size: 24px; font-weight: 600; letter-spacing: -0.035em; }
+  .heading .m { font-size: 12.5px; color: var(--faint); }
+  body.dark .heading { --text: #f0f6fc; --border-strong: #30363d; --faint: #9198a1; }
+  body.light .heading { --text: #1f2328; --border-strong: #d1d9e0; --faint: #59636e; }
+
+  /* project cards */
+  .proj { display: flex; flex-direction: column; }
+  .shot { background: var(--bg-sub); border-bottom: 1px solid var(--border); overflow: hidden; flex: none; }
+  .shot img { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .half .shot { height: 300px; }
+  .shot.contain {
+    padding: 22px; display: flex; justify-content: center;
+    background: radial-gradient(var(--dots) 1px, transparent 1.2px) 0 0 / 14px 14px, var(--bg-sub);
+  }
+  .shot.contain img {
+    width: auto; height: 100%; object-fit: contain;
+    border-radius: 8px; border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,.18);
+  }
+  .shot.white img { background: #fff; }
+  .full .shot { height: 462px; }
+  .body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+  .full .body { padding: 24px 28px 26px; }
+  .row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .name { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; }
+  .full .name { font-size: 22px; letter-spacing: -0.03em; }
+  .plat { font-size: 12px; color: var(--faint); }
+  .desc { font-size: 14px; line-height: 1.6; color: var(--muted); margin-top: 8px; }
+  .full .desc { font-size: 15.5px; max-width: 760px; }
+  .foot { margin-top: auto; padding-top: 16px; }
+  .cmd {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    font-size: 12px; color: var(--text);
+    background: var(--bg-sub); border: 1px solid var(--border); border-radius: 6px;
+    padding: 0 10px 0 12px; height: 34px; white-space: nowrap;
+  }
+  .cmd .p { color: var(--faint); margin-right: 6px; }
+  .cmd svg { color: var(--faint); width: 14px; height: 14px; }
+  .url { font-size: 12.5px; color: var(--faint); display: flex; align-items: center; gap: 4px; height: 34px; }
+  .url svg { width: 13px; height: 13px; }
+
+  /* contribution cards */
+  .contrib { padding: 20px 22px 22px; display: flex; flex-direction: column; }
+  .contrib .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .who { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .who img { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border); flex: none; }
+  .repo { font-size: 14.5px; white-space: nowrap; letter-spacing: -0.01em; }
+  .repo .o { color: var(--muted); }
+  .repo .s { color: var(--faint); margin: 0 3px; }
+  .repo .r { font-weight: 600; }
+  .status { font-size: 12.5px; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+  .status i { width: 8px; height: 8px; border-radius: 50%; display: block; }
+  .status.merged i { background: var(--green); }
+  .status.review i { background: var(--amber); }
+  .meta { font-size: 12px; color: var(--faint); margin-top: 12px; }
+  .contrib .what { font-size: 14px; line-height: 1.6; color: var(--muted); margin-top: 6px; }
+  .contrib code { font-size: 12.5px; padding: 1px 5px; border-radius: 4px; background: var(--bg-sub); border: 1px solid var(--border); color: var(--text); }
+
+  /* minis */
+  .mini { padding: 18px 22px 20px; }
+  .mini .row { align-items: center; }
+  .mini .n { font-size: 15px; font-weight: 600; letter-spacing: -0.015em; }
+  .mini .row svg { color: var(--faint); width: 14px; height: 14px; }
+  .mini .d { font-size: 13.5px; line-height: 1.55; color: var(--muted); margin-top: 6px; }
+</style>
+</head>
+<body class="dark">
+<div id="root" style="display:contents"></div>
+<script>
+const icons = {
+  globe: '<circle cx="8" cy="8" r="6.25"/><path d="M1.75 8h12.5M8 1.75c1.8 1.9 2.6 3.9 2.6 6.25S9.8 12.35 8 14.25M8 1.75C6.2 3.65 5.4 5.65 5.4 8s.8 4.35 2.6 6.25"/>',
+  mail: '<rect x="1.75" y="3.25" width="12.5" height="9.5" rx="1.5"/><path d="M2.25 4.25 8 8.75l5.75-4.5"/>',
+  arrow: '<path d="M5 11 11 5M6 5h5v5"/>',
+  copy: '<rect x="5.25" y="5.25" width="8.5" height="8.5" rx="1.5"/><path d="M10.75 5.25V3.75a1.5 1.5 0 0 0-1.5-1.5h-5.5a1.5 1.5 0 0 0-1.5 1.5v5.5a1.5 1.5 0 0 0 1.5 1.5h1.5"/>',
+};
+const filled = {
+  github: '<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>',
+  apple: '<path d="M11.2 8.5c0-1.6 1.3-2.4 1.4-2.4-.8-1.1-2-1.3-2.4-1.3-1-.1-2 .6-2.5.6s-1.3-.6-2.2-.6C4.4 4.8 3.3 5.5 2.7 6.6c-1.2 2.1-.3 5.2.9 6.9.6.8 1.2 1.7 2.1 1.7.8 0 1.2-.5 2.2-.5s1.3.5 2.2.5c.9 0 1.5-.9 2-1.7.6-.9.9-1.8.9-1.9 0 0-1.8-.7-1.8-3.1zM9.6 3.6c.5-.6.8-1.4.7-2.2-.7 0-1.5.5-2 1.1-.4.5-.8 1.3-.7 2.1.8.1 1.5-.4 2-1z"/>',
+};
+const icon = (k) => filled[k]
+  ? `<svg class="i" viewBox="0 0 16 16" fill="currentColor">${filled[k]}</svg>`
+  : `<svg class="i" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${icons[k]}</svg>`;
+
+const btn = (b) => `<div class="btn ${b.primary ? "primary" : ""}" data-out="${b.out}">${icon(b.icon)}${b.text}</div>`;
+
+const foot = (p) => p.cmd
+  ? `<div class="cmd mono"><span><span class="p">$</span>${p.cmd}</span>${icon("copy")}</div>`
+  : `<div class="url mono">${p.url}${icon("arrow")}</div>`;
+
+const proj = (p, size) => `
+  <div class="card ${size} proj ${size === "half" ? "eq-proj" : ""}" data-out="${p.out}">
+    <div class="shot ${p.fit || ""}"><img src="${p.img}" style="object-position:${p.pos || "center"}"></div>
+    <div class="body">
+      <div class="row"><span class="name">${p.name}</span><span class="plat mono">${p.platform}</span></div>
+      <div class="desc">${p.desc}</div>
+      ${p.cmd || p.url ? `<div class="foot">${foot(p)}</div>` : ""}
+    </div>
+  </div>`;
+
+const heading = (key, h) =>
+  `<div class="heading" data-out="h-${key}"><span class="t">${h.title}</span><span class="m mono">${h.meta}</span></div>`;
+
+window.build = (d, theme) => {
+  document.body.className = theme;
+  const H = d.hero;
+  document.getElementById("root").innerHTML = `
+    <div class="card full hero" data-out="hero">
+      <div class="grid"></div>
+      <div class="inner">
+        <div class="label mono">${H.label}</div>
+        <h1>${H.title}<span>${H.subtitle}</span></h1>
+        <p>${H.text}</p>
+      </div>
+      <div class="stats">${H.stats.map(s => `<div class="stat"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join("")}</div>
+    </div>
+    ${d.heroButtons.map(btn).join("")}
+    ${d.featured.buttons.map(btn).join("")}
+    ${btn(d.more)}
+    ${Object.entries(d.headings).map(([k, h]) => heading(k, h)).join("")}
+    ${proj(d.featured, "full")}
+    ${d.projects.map(p => proj(p, "half")).join("")}
+    ${d.contribs.map(c => `
+      <div class="card half contrib eq-contrib" data-out="${c.out}">
+        <div class="top">
+          <div class="who"><img src="https://github.com/${c.owner}.png?size=88"><span class="repo"><span class="o">${c.owner}</span><span class="s">/</span><span class="r">${c.repo}</span></span></div>
+          <span class="status ${c.status}"><i></i>${c.label || (c.status === "merged" ? "Merged" : "In review")}</span>
+        </div>
+        <div class="meta mono">${c.meta}</div>
+        <div class="what">${c.what}</div>
+      </div>`).join("")}
+    ${d.minis.map(m => `
+      <div class="card half mini eq-mini" data-out="${m.out}">
+        <div class="row"><span class="n">${m.name}</span>${icon("arrow")}</div>
+        <div class="d">${m.desc}</div>
+      </div>`).join("")}
+  `;
+};
+
+// Equalize heights within each group so cards side by side line up.
+window.equalize = () => {
+  for (const g of ["eq-proj", "eq-contrib", "eq-mini"]) {
+    const els = [...document.getElementsByClassName(g)];
+    const max = Math.max(...els.map(e => e.getBoundingClientRect().height));
+    els.forEach(e => e.style.height = Math.ceil(max) + "px");
+  }
+};
+</script>
+</body>
+</html>

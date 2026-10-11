@@ -1,0 +1,242 @@
+{
+  "hero": {
+    "link": "https://thefilip.com",
+    "label": "thefilip.com",
+    "title": "Hi, I'm Filip.",
+    "subtitle": "I make random stuff.",
+    "text": "iPhone apps, Mac apps, 3DS homebrew, CircuitPython drivers nobody else wrote, and way too many plane things. I build things because I want them to exist, then put them on the internet.",
+    "stats": [
+      {
+        "n": "2,700+",
+        "l": "Warsaw buses and trams to collect in TABOR"
+      },
+      {
+        "n": "~1,100",
+        "l": "aircraft added to plane-alert-db"
+      },
+      {
+        "n": "1",
+        "l": "board ported to official CircuitPython"
+      }
+    ]
+  },
+  "heroButtons": [
+    {
+      "out": "btn-site",
+      "text": "thefilip.com",
+      "icon": "globe",
+      "primary": true,
+      "link": "https://thefilip.com"
+    },
+    {
+      "out": "btn-email",
+      "text": "fm@thefilip.com",
+      "icon": "mail",
+      "link": "mailto:fm@thefilip.com"
+    }
+  ],
+  "headings": {
+    "made": {
+      "title": "Things I made",
+      "meta": "iOS · macOS · 3DS · web · hardware"
+    },
+    "oss": {
+      "title": "Contributions",
+      "meta": "other people's projects"
+    },
+    "also": {
+      "title": "Also",
+      "meta": "smaller things"
+    }
+  },
+  "featured": {
+    "out": "tabor",
+    "name": "TABOR",
+    "platform": "iPhone",
+    "img": "https://thefilip.com/tabor/opengraph-image.jpg",
+    "link": "https://thefilip.com/projects/tabor",
+    "desc": "A Pokédex for Warsaw's buses and trams. Point the camera at one and its fleet number goes into your book as a die-cut sticker. The rarer the model, the louder it lands. A live map shows the ones you're still missing, and the Lock Screen tells you when one is about to reach your stop.",
+    "buttons": [
+      {
+        "out": "btn-testflight",
+        "text": "Join the TestFlight beta",
+        "icon": "apple",
+        "primary": true,
+        "link": "https://testflight.apple.com/join/rt5RfQJ1"
+      },
+      {
+        "out": "btn-tabor-source",
+        "text": "Source",
+        "icon": "github",
+        "link": "https://github.com/TheFilipcom4607/tabor"
+      },
+      {
+        "out": "btn-tabor-pl",
+        "text": "Po polsku",
+        "icon": "arrow",
+        "link": "https://thefilip.com/tabor"
+      }
+    ]
+  },
+  "projects": [
+    {
+      "out": "wattson",
+      "name": "Wattson",
+      "platform": "macOS",
+      "img": "https://raw.githubusercontent.com/TheFilipcom4607/wattson/HEAD/docs/panel-charging.jpeg",
+      "link": "https://thefilip.com/projects/wattson",
+      "desc": "A menu bar battery that says what it's actually doing. Where every watt goes, and what's on the other end of each USB-C cable.",
+      "cmd": "brew install --cask TheFilipcom4607/tap/wattson",
+      "fit": "contain"
+    },
+    {
+      "out": "blockblast",
+      "name": "BlockBlast3DS",
+      "platform": "3DS",
+      "img": "https://assets.thefilip.com/blockblast-hero.png",
+      "link": "https://thefilip.com/projects/blockblast3ds",
+      "desc": "Block Blast, the phone game, ported to the Nintendo 3DS as homebrew. It runs on old and new models, 2DS included.",
+      "url": "github.com/TheFilipcom4607/BlockBlast-3DS",
+      "fit": "contain white"
+    },
+    {
+      "out": "ffmep",
+      "name": "ffmep",
+      "platform": "macOS",
+      "pos": "left top",
+      "img": "https://raw.githubusercontent.com/TheFilipcom4607/ffmep/HEAD/docs/window-light.png",
+      "link": "https://thefilip.com/projects/ffmep",
+      "desc": "ffmpeg as a Mac app that feels like it came with the Mac. Drop files in, pick a format, done. Also does HEIC, WebP, Live Photos and on-device background removal.",
+      "cmd": "brew install TheFilipcom4607/tap/ffmep"
+    },
+    {
+      "out": "labeler",
+      "name": "Labeler",
+      "platform": "Web",
+      "img": "https://assets.thefilip.com/labeler.png",
+      "link": "https://assets.thefilip.com/labeler",
+      "desc": "Printable sticker labels for 3D Benchys. Every Benchy deserves a name tag.",
+      "url": "assets.thefilip.com/labeler"
+    },
+    {
+      "out": "adsbnear",
+      "name": "ADSBnear",
+      "platform": "CircuitPython",
+      "img": "https://assets.thefilip.com/adsbnear-v1.1.jpg",
+      "link": "https://thefilip.com/projects/ADSBnear",
+      "desc": "A little desk box that shows the nearest plane overhead on a 16×2 LCD: callsign, distance, type, altitude and speed, from live ADS-B data.",
+      "url": "github.com/TheFilipcom4607/ADSBnear"
+    },
+    {
+      "out": "planeguessr",
+      "name": "PlaneGuessr",
+      "platform": "Web",
+      "img": "https://assets.thefilip.com/planeguessr.jpg",
+      "link": "https://planeguessr.com",
+      "desc": "Is that a 737 or an A320? Guess the aircraft from its side profile. 60 aircraft from 13 manufacturers.",
+      "url": "planeguessr.com",
+      "fit": "contain"
+    }
+  ],
+  "contribs": [
+    {
+      "out": "c-circuitpython",
+      "owner": "adafruit",
+      "repo": "circuitpython",
+      "status": "merged",
+      "meta": "4.5k stars · Python for microcontrollers",
+      "link": "https://github.com/adafruit/circuitpython/pull/11321",
+      "what": "Ported CircuitPython to the Challenger RP2040 NFC, the only Challenger RP2040 board without it. It ships in the official builds, with its own page on circuitpython.org."
+    },
+    {
+      "out": "c-planealert",
+      "owner": "sdr-enthusiasts",
+      "repo": "plane-alert-db",
+      "status": "merged",
+      "label": "27 merged",
+      "meta": "The alert list ADS-B feeders run on",
+      "link": "https://github.com/sdr-enthusiasts/plane-alert-db/pulls?q=is%3Apr+author%3ATheFilipcom4607+is%3Amerged",
+      "what": "Added ~1,100 aircraft it was missing, from Polish Air Force MiG-29s to 28 TS-11 Iskras."
+    },
+    {
+      "out": "c-ohmypi",
+      "owner": "can1357",
+      "repo": "oh-my-pi",
+      "status": "merged",
+      "meta": "35k stars · coding agent with the IDE wired in",
+      "link": "https://github.com/can1357/oh-my-pi/pull/11740",
+      "what": "Made <code>free</code> a searchable model fact."
+    },
+    {
+      "out": "c-macusb",
+      "owner": "Kruszoneq",
+      "repo": "macUSB",
+      "status": "review",
+      "meta": "3.2k stars · bootable USB creator for Mac",
+      "link": "https://github.com/Kruszoneq/macUSB/pull/141",
+      "what": "Adding support for solid install.wim images when splitting Windows WIMs. The maintainer invited the PR."
+    },
+    {
+      "out": "c-openpuck",
+      "owner": "safijari",
+      "repo": "openpuck",
+      "status": "merged",
+      "meta": "1k stars · Steam Controller puck firmware",
+      "link": "https://github.com/safijari/openpuck/pull/224",
+      "what": "Added configurable rumble style and strength."
+    },
+    {
+      "out": "c-udb",
+      "owner": "Universal-Team",
+      "repo": "db",
+      "status": "merged",
+      "meta": "Universal-DB · 3DS and DS homebrew database",
+      "link": "https://github.com/Universal-Team/db/pull/620",
+      "what": "Listed BlockBlast3DS, so it installs straight from Universal-Updater on the console."
+    }
+  ],
+  "minis": [
+    {
+      "out": "m-pn7150",
+      "name": "circuitpython-pn7150",
+      "link": "https://github.com/TheFilipcom4607/circuitpython-pn7150",
+      "desc": "NFC driver that reads and writes NDEF on basically every tag type, and can pretend to be a tag. In the Community Bundle."
+    },
+    {
+      "out": "m-st25dv",
+      "name": "circuitpython-st25dv",
+      "link": "https://github.com/TheFilipcom4607/circuitpython-st25dv",
+      "desc": "The other end of NFC: a board on one side, a phone on the other, both reading the same memory. Also in the Bundle."
+    },
+    {
+      "out": "m-funplaneviewer",
+      "name": "FunPlaneViewer",
+      "link": "https://thefilip.com/projects/funplaneviewer",
+      "desc": "A better viewer for every plane your ADS-B feeder has logged on SkyStats."
+    },
+    {
+      "out": "m-magictimer",
+      "name": "Magic-Timer",
+      "link": "https://thefilip.com/projects/magictimer",
+      "desc": "Speedcubing timers are expensive and boring, so I'm building one with an OLED and NeoPixels."
+    },
+    {
+      "out": "m-spaas",
+      "name": "SPaaS",
+      "link": "https://getspaas.com",
+      "desc": "Shitposting as a Service. The future of brand loyalty."
+    },
+    {
+      "out": "m-1610",
+      "name": "1610.uk",
+      "link": "https://1610.uk",
+      "desc": "A countdown to 16:10. It's .uk because the domain was cheap."
+    }
+  ],
+  "more": {
+    "out": "btn-more",
+    "text": "Everything else on thefilip.com/projects",
+    "icon": "arrow",
+    "link": "https://thefilip.com/projects"
+  }
+}
