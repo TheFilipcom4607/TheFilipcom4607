@@ -93,12 +93,13 @@
     {
       "out": "blockblast",
       "name": "BlockBlast3DS",
-      "platform": "3DS",
+      "platform": "Any 3DS or 2DS · homebrew",
       "img": "https://assets.thefilip.com/blockblast-hero.png",
       "link": "https://thefilip.com/projects/blockblast3ds/install",
       "desc": "Block Blast, the phone game, ported to the Nintendo 3DS as homebrew. It runs on old and new models, 2DS included.",
-      "url": "Install: FBI QR code, .cia or .3dsx",
-      "fit": "contain white"
+      "fit": "contain white",
+      "download": "Install on 3DS",
+      "alt": "QR, .cia or .3dsx"
     },
     {
       "out": "ffmep",
