@@ -157,6 +157,63 @@
   .mini .n { font-size: 15px; font-weight: 600; letter-spacing: -0.015em; }
   .mini .row svg { color: var(--faint); width: 14px; height: 14px; }
   .mini .d { font-size: 13.5px; line-height: 1.55; color: var(--muted); margin-top: 6px; }
+
+  /* phone variants (*-sm): a 360px README, so half cards are about 160px on screen */
+  body.sm .full, body.sm .heading { width: 360px; }
+  body.sm .half { width: 177px; }
+  body.sm .card { border-radius: 10px; }
+
+  body.sm .hero .inner { padding: 26px 22px 22px; }
+  body.sm .hero .label { font-size: 12px; }
+  body.sm .hero h1 { font-size: 32px; margin-top: 14px; }
+  body.sm .hero p { font-size: 14px; line-height: 1.55; margin-top: 14px; }
+  body.sm .stat { padding: 14px 12px 16px; }
+  body.sm .stat .n { font-size: 20px; }
+  body.sm .stat .l { font-size: 11px; line-height: 1.4; margin-top: 4px; }
+
+  body.sm .heading { padding: 2px 0 10px; }
+  body.sm .heading .t { font-size: 20px; }
+  body.sm .heading .m { font-size: 10.5px; }
+
+  body.sm .full .shot { height: 189px; }
+  body.sm .full .body { padding: 16px 18px 18px; }
+  body.sm .full .name { font-size: 19px; }
+  body.sm .full .plat { font-size: 10.5px; }
+  body.sm .full .desc { font-size: 13.5px; line-height: 1.55; }
+
+  body.sm .half .shot { height: 124px; }
+  body.sm .half .shot.contain { padding: 10px; }
+  body.sm .half .shot.contain img { border-radius: 5px; box-shadow: 0 4px 12px rgba(0,0,0,.18); }
+  body.sm .half .body { padding: 11px 12px 13px; }
+  body.sm .proj.half .row { flex-direction: column; align-items: flex-start; gap: 2px; }
+  body.sm .half .name { font-size: 14.5px; }
+  body.sm .half .plat { font-size: 10px; }
+  body.sm .half .desc { font-size: 12px; line-height: 1.5; margin-top: 6px; }
+  body.sm .foot { padding-top: 12px; }
+  body.sm .foot:has(.url) { display: none; }
+  body.sm .dl { height: 28px; }
+  body.sm .dl .alt { display: none; }
+  body.sm .btn.sm { height: 28px; padding: 0 10px; font-size: 11.5px; gap: 5px; }
+  body.sm .btn.sm svg { width: 13px; height: 13px; }
+
+  body.sm .contrib { padding: 12px 12px 14px; position: relative; }
+  body.sm .who { flex-direction: column; align-items: flex-start; gap: 8px; }
+  body.sm .who img { width: 20px; height: 20px; }
+  body.sm .repo { display: flex; flex-direction: column; white-space: normal; }
+  body.sm .repo .o { font-size: 11.5px; }
+  body.sm .repo .s { display: none; }
+  body.sm .repo .r { font-size: 14px; }
+  body.sm .status { font-size: 10.5px; gap: 5px; position: absolute; top: 15px; right: 12px; }
+  body.sm .status i { width: 6px; height: 6px; }
+  body.sm .meta { font-size: 10px; line-height: 1.45; margin-top: 8px; }
+  body.sm .contrib .what { font-size: 12px; line-height: 1.5; margin-top: 5px; }
+  body.sm .contrib code { font-size: 11px; padding: 0 4px; }
+
+  body.sm .mini { padding: 11px 12px 13px; }
+  body.sm .mini .row { align-items: flex-start; gap: 6px; }
+  body.sm .mini .n { font-size: 13px; overflow-wrap: anywhere; }
+  body.sm .mini .row svg { width: 12px; height: 12px; margin-top: 2px; }
+  body.sm .mini .d { font-size: 11.5px; line-height: 1.5; margin-top: 4px; }
 </style>
 </head>
 <body class="dark">
@@ -198,9 +255,11 @@ const proj = (p, size) => `
 const heading = (key, h) =>
   `<div class="heading" data-out="h-${key}"><span class="t">${h.title}</span><span class="m mono">${h.meta}</span></div>`;
 
-window.build = (d, theme) => {
-  document.body.className = theme;
+// size "sm" builds the phone variants. Buttons have a fixed height in the README, so they get none.
+window.build = (d, theme, size) => {
+  document.body.className = `${theme} ${size}`;
   const H = d.hero;
+  const buttons = size === "sm" ? "" : [...d.heroButtons, ...d.featured.buttons, d.more].map(btn).join("");
   document.getElementById("root").innerHTML = `
     <div class="card full hero" data-out="hero">
       <div class="grid"></div>
@@ -211,9 +270,7 @@ window.build = (d, theme) => {
       </div>
       <div class="stats">${H.stats.map(s => `<div class="stat"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join("")}</div>
     </div>
-    ${d.heroButtons.map(btn).join("")}
-    ${d.featured.buttons.map(btn).join("")}
-    ${btn(d.more)}
+    ${buttons}
     ${Object.entries(d.headings).map(([k, h]) => heading(k, h)).join("")}
     ${proj(d.featured, "full")}
     ${d.projects.map(p => proj(p, "half")).join("")}

@@ -2,10 +2,12 @@
 
     python3 render.py
 
-Every card is rendered twice (dark and light) at 2x into ../cards/, and the
-README swaps between them with <picture> to follow the viewer's GitHub theme.
+Every card is rendered dark and light, at desktop size and (except buttons) at a
+phone size, as WebP into ../cards/. The README picks one with <picture>: the
+viewer's GitHub theme, and the -sm variant when the window is phone-narrow.
 """
 import html
+import io
 import json
 import pathlib
 import sys
@@ -17,53 +19,81 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 CARDS = ROOT / "cards"
 THEMES = ("dark", "light")
-SCALE = 2
-GUTTER = 12  # px between paired cards; half of it is baked into each side
-ROW_GAP = 6  # extra px under paired cards, on top of the inline-image line gap
+# suffix, cards.html size class, device scale, gutter between paired cards, extra px under them
+VARIANTS = (
+    ("", "", 2, 12, 6),
+    ("-sm", "sm", 3, 6, 1),
+)
+NARROW = "(max-width: 600px)"
 
 
-def pad_pairs(data, theme):
-    """Bake the gutter into half-width cards so a pair is exactly 100% wide."""
-    for group in ("projects", "contribs", "minis"):
-        for i, item in enumerate(data[group]):
-            path = CARDS / f"{item['out']}-{theme}.png"
-            im = Image.open(path)
-            g, b = GUTTER // 2 * SCALE, ROW_GAP * SCALE
-            out = Image.new("RGBA", (im.width + g, im.height + b), (0, 0, 0, 0))
-            out.paste(im, (0 if i % 2 == 0 else g, 0))
-            out.save(path, optimize=True)
+def pair_side(data):
+    """0 for the left card of a pair, 1 for the right, by output name."""
+    return {item["out"]: i % 2 for g in ("projects", "contribs", "minis") for i, item in enumerate(data[g])}
+
+
+def save(png, path, side, scale, gutter, row_gap):
+    """Bake half the gutter into paired cards so a pair is exactly 100% wide, then write WebP."""
+    im = Image.open(io.BytesIO(png))
+    if side is not None:
+        g, b = gutter // 2 * scale, row_gap * scale
+        out = Image.new("RGBA", (im.width + g, im.height + b), (0, 0, 0, 0))
+        out.paste(im, (g * side, 0))
+        im = out
+    im.save(path, quality=90, method=6)
 
 
 def render(data):
     CARDS.mkdir(exist_ok=True)
+    sides = pair_side(data)
+    written = set()
     with sync_playwright() as p:
         browser = p.chromium.launch(channel="chrome")
-        page = browser.new_page(viewport={"width": 960, "height": 900}, device_scale_factor=SCALE)
-        page.goto((HERE / "cards.html").as_uri(), wait_until="networkidle")
-        for theme in THEMES:
-            page.evaluate("([d, t]) => build(d, t)", [data, theme])
-            page.evaluate("document.fonts.ready")
-            page.evaluate(
-                "Promise.all([...document.images].map(i => i.complete ? 0 :"
-                " new Promise(r => i.onload = i.onerror = r)))"
-            )
-            broken = page.evaluate("[...document.images].filter(i => !i.naturalWidth).map(i => i.src)")
-            if broken:
-                sys.exit(f"images failed to load (try again): {broken}")
-            page.evaluate("equalize()")
-            for el in page.query_selector_all("[data-out]"):
-                name = el.get_attribute("data-out")
-                el.screenshot(path=str(CARDS / f"{name}-{theme}.png"), omit_background=True)
-            pad_pairs(data, theme)
-            print(f"rendered {theme}")
+        for suffix, size, scale, gutter, row_gap in VARIANTS:
+            page = browser.new_page(viewport={"width": 960, "height": 900}, device_scale_factor=scale)
+            page.goto((HERE / "cards.html").as_uri(), wait_until="networkidle")
+            for theme in THEMES:
+                page.evaluate("([d, t, s]) => build(d, t, s)", [data, theme, size])
+                page.evaluate("document.fonts.ready")
+                page.evaluate(
+                    "Promise.all([...document.images].map(i => i.complete ? 0 :"
+                    " new Promise(r => i.onload = i.onerror = r)))"
+                )
+                broken = page.evaluate("[...document.images].filter(i => !i.naturalWidth).map(i => i.src)")
+                if broken:
+                    sys.exit(f"images failed to load (try again): {broken}")
+                page.evaluate("equalize()")
+                for el in page.query_selector_all("[data-out]"):
+                    name = el.get_attribute("data-out")
+                    path = CARDS / f"{name}-{theme}{suffix}.webp"
+                    save(el.screenshot(omit_background=True), path, sides.get(name), scale, gutter, row_gap)
+                    written.add(path)
+                print(f"rendered {theme}{suffix}")
+            page.close()
         browser.close()
+    for stale in set(CARDS.iterdir()) - written:
+        stale.unlink()
 
 
-def pic(name, alt, size):
-    """A theme-aware image. size is an <img> attribute string like 'width="50%"'."""
+def pic(name, alt, size, phone=True):
+    """A theme-aware image. size is an <img> attribute string like 'width="50%"'.
+
+    The phone sources write "prefers-color-scheme:dark" without the space on purpose:
+    GitHub's <themed-picture> rewrites the whole media query of any source matching
+    "prefers-color-scheme: dark" to follow the GitHub theme setting, which would drop
+    the width check and show phone cards on desktop. Without the space it leaves them
+    alone, so phone cards follow the OS theme instead.
+    """
+    src = lambda theme, suffix="": f"cards/{name}-{theme}{suffix}.webp"
+    sources = ""
+    if phone:
+        sources += (
+            f'<source media="{NARROW} and (prefers-color-scheme:dark)" srcset="{src("dark", "-sm")}">'
+            f'<source media="{NARROW}" srcset="{src("light", "-sm")}">'
+        )
     return (
-        f'<picture><source media="(prefers-color-scheme: dark)" srcset="cards/{name}-dark.png">'
-        f'<img src="cards/{name}-light.png" alt="{html.escape(alt)}" {size}></picture>'
+        f'<picture>{sources}<source media="(prefers-color-scheme: dark)" srcset="{src("dark")}">'
+        f'<img src="{src("light")}" alt="{html.escape(alt)}" {size}></picture>'
     )
 
 
@@ -72,7 +102,7 @@ def link(href, inner):
 
 
 def buttons(items):
-    return "\n".join(link(b["link"], pic(b["out"], b["text"], 'height="40"')) for b in items)
+    return "\n".join(link(b["link"], pic(b["out"], b["text"], 'height="40"', phone=False)) for b in items)
 
 
 def pairs(cells):
