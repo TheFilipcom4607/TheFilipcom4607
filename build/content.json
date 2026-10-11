@@ -52,17 +52,17 @@
   "featured": {
     "out": "tabor",
     "name": "TABOR",
-    "platform": "iPhone",
+    "platform": "iOS 18+ · iPhone",
     "img": "https://thefilip.com/tabor/opengraph-image.jpg",
     "link": "https://thefilip.com/projects/tabor",
     "desc": "A Pokédex for Warsaw's buses and trams. Point the camera at one and its fleet number goes into your book as a die-cut sticker. The rarer the model, the louder it lands. A live map shows the ones you're still missing, and the Lock Screen tells you when one is about to reach your stop.",
     "buttons": [
       {
         "out": "btn-testflight",
-        "text": "Join the TestFlight beta",
+        "text": "Try the beta",
         "icon": "apple",
         "primary": true,
-        "link": "https://testflight.apple.com/join/rt5RfQJ1"
+        "link": "https://thefilip.com/projects/tabor/install"
       },
       {
         "out": "btn-tabor-source",
@@ -82,32 +82,34 @@
     {
       "out": "wattson",
       "name": "Wattson",
-      "platform": "macOS",
+      "platform": "macOS 13+ · Apple silicon",
       "img": "https://raw.githubusercontent.com/TheFilipcom4607/wattson/HEAD/docs/panel-charging.jpeg",
-      "link": "https://thefilip.com/projects/wattson",
+      "link": "https://thefilip.com/projects/wattson/install",
       "desc": "A menu bar battery that says what it's actually doing. Where every watt goes, and what's on the other end of each USB-C cable.",
-      "cmd": "brew install --cask TheFilipcom4607/tap/wattson",
-      "fit": "contain"
+      "fit": "contain",
+      "download": "Download for Mac",
+      "alt": "or Homebrew"
     },
     {
       "out": "blockblast",
       "name": "BlockBlast3DS",
       "platform": "3DS",
       "img": "https://assets.thefilip.com/blockblast-hero.png",
-      "link": "https://thefilip.com/projects/blockblast3ds",
+      "link": "https://thefilip.com/projects/blockblast3ds/install",
       "desc": "Block Blast, the phone game, ported to the Nintendo 3DS as homebrew. It runs on old and new models, 2DS included.",
-      "url": "github.com/TheFilipcom4607/BlockBlast-3DS",
+      "url": "Install: FBI QR code, .cia or .3dsx",
       "fit": "contain white"
     },
     {
       "out": "ffmep",
       "name": "ffmep",
-      "platform": "macOS",
+      "platform": "macOS 14+ · Apple silicon",
       "pos": "left top",
       "img": "https://raw.githubusercontent.com/TheFilipcom4607/ffmep/HEAD/docs/window-light.png",
-      "link": "https://thefilip.com/projects/ffmep",
+      "link": "https://thefilip.com/projects/ffmep/install",
       "desc": "ffmpeg as a Mac app that feels like it came with the Mac. Drop files in, pick a format, done. Also does HEIC, WebP, Live Photos and on-device background removal.",
-      "cmd": "brew install TheFilipcom4607/tap/ffmep"
+      "download": "Download for Mac",
+      "alt": "or Homebrew"
     },
     {
       "out": "labeler",
