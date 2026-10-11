@@ -174,7 +174,7 @@
       "out": "c-macusb",
       "owner": "Kruszoneq",
       "repo": "macUSB",
-      "status": "review",
+      "status": "merged",
       "meta": "3.2k stars · bootable USB creator for Mac",
       "link": "https://github.com/Kruszoneq/macUSB/pull/141",
       "what": "Fixed USBs made from UUP-built Windows ISOs like CrystalFetch, whose solid install.wim used to fail the FAT32 split. The maintainer invited the PR."
