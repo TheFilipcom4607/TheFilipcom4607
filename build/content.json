@@ -156,7 +156,7 @@
       "label": "27 merged",
       "meta": "The alert list ADS-B feeders run on",
       "link": "https://github.com/sdr-enthusiasts/plane-alert-db/pulls?q=is%3Apr+author%3ATheFilipcom4607+is%3Amerged",
-      "what": "Added ~1,100 aircraft it was missing, from Polish Air Force MiG-29s to 28 TS-11 Iskras."
+      "what": "Added ~1,100 aircraft it was missing, from Polish Air Force MiG-29s to 293 V-22 Ospreys."
     },
     {
       "out": "c-ohmypi",
